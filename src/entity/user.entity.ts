@@ -6,12 +6,12 @@ import { TUser } from '../interfaces/IUser';
 export default class User {
   first_name: string;
   last_name: string;
-  id: number;
+  id: string;
 
   constructor({ first_name, last_name, id }: TUser) {
     this.first_name = first_name;
     this.last_name = last_name;
-    this.id = id ?? cryto.randomUUID();
+    this.id = id ?? crypto.randomUUID();
   }
 
   // create({ first_name, last_name, id }: TUser) {

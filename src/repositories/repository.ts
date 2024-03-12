@@ -1,18 +1,23 @@
 import Database from "../config/dbConnection";
+import { TUser } from "../interfaces/IUser";
 
 export default class UserRepository {
-  dbConnection: Database;
+  userDb: Collection<any>;
 
-  constructor({ dbConnection }: { dbConnection: Database }) {
-    this.dbConnection = dbConnection;
+  constructor({ db }: { db: Loki }) {
+    this.userDb = db.addCollection('user')
   }
 
-  async find(query: any) {
-    return this.dbConnection.find(query);
+  async find() {
+    return this.userDb.find().map(({ meta, $loki, ...result }) => result);
   }
 
-  async create(data: any) {
-    return this.dbConnection.create(data);
+  async create(data: TUser) {
+    const { $loki, meta, ...result } = this.userDb.insertOne(data);
+
+
+    return result
+
   }
 }
 
