@@ -16,8 +16,6 @@ class MockDatabase extends Database {
   }
 }
 
-
-
 const MOCK_USERS = [
   { first_name: "ERIC", last_name: "oliveira", id: "irfjkbijbnkjrbnf" },
 ];

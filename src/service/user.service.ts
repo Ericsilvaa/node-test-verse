@@ -12,11 +12,13 @@ export default class UserService {
   async find(query: any) {
     const users = await this.userRepository.find();
 
-    return users.map(({ first_name, ...result }) => new User({ first_name, ...result }))
-
+    return users.map(
+      ({ first_name, ...result }) =>
+        new User({ first_name: first_name.toUpperCase(), ...result, })
+    );
   }
 
-  async create(data: any) {
+  async create(data: TUser) {
     if (!new User(data).isValid()) {
       return {
         error: {
@@ -28,8 +30,6 @@ export default class UserService {
 
     const result = await this.userRepository.create(data);
 
-    return result
+    return result;
   }
-
 }
-
